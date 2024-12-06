@@ -1,4 +1,3 @@
-Here's a sample **README.md** for your repository:
 
 ---
 
@@ -117,5 +116,3 @@ For queries, feel free to reach out:
 - **GitHub**: [AloneFFOfficial](https://github.com/AloneFFOfficial)
 
 ---
-
-Let me know if you need any modifications or additional sections!
