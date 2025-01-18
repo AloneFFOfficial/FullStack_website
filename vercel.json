@@ -3,12 +3,13 @@
     "builds": [
       {
         "src": "manage.py",
-        "use": "@vercel/python"
+        "use": "@vercel/python",
+        "config": { "zeroConfig": true }
       }
     ],
     "routes": [
       { "src": "/(.*)", "dest": "manage.py" }
     ],
-    "ignoreCommand": "echo 'Nothing to ignore'"
-  }
+    "buildCommand": "python manage.py collectstatic --noinput"
+}
   
