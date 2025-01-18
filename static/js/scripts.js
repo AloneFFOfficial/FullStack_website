@@ -40,55 +40,61 @@ $(document).ready(function () {
     );
   });
 
-//   email handler start
-  // Listen for the form submission
+// Email handler start
 document.getElementById("contact-form").addEventListener("submit", async function (event) {
-    event.preventDefault(); // Prevent the default form submission behavior
-  
-    // Get form data
-    const formData = new FormData(this);
-  
-    // Convert form data to an object
-    const data = {};
-    formData.forEach((value, key) => {
+  event.preventDefault(); // Prevent the default form submission behavior
+
+  // Get form data
+  const formData = new FormData(this);
+
+  // Convert form data to an object
+  const data = {};
+  formData.forEach((value, key) => {
       data[key] = value;
-    });
-  
-    // Send form data to the Django backend
-    try {
-      const response = await fetch("send-email/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": getCSRFToken(), // Include CSRF token if you're using Django forms
-        },
-        body: JSON.stringify(data),
-      });
-  
-      if (response.ok) {
-        alert("Form Submitted Successfully");
-        this.reset(); // Reset the form after successful submission
-      } else {
-        const errorData = await response.json();
-        alert(`Form Submission Failed: ${errorData.message || "Unknown Error"}`);
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("An error occurred. Please try again later.");
-    }
   });
-  
-  // Function to get CSRF token from the cookie (needed for Django)
-  function getCSRFToken() {
-    const cookies = document.cookie.split("; ");
-    for (let cookie of cookies) {
-      if (cookie.startsWith("csrftoken=")) {
-        return cookie.split("=")[1];
+
+  // Send form data to the Django backend
+  try {
+      const response = await fetch("send-email/", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": getCSRFToken(), // Include CSRF token if you're using Django forms
+          },
+          body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+          showCustomAlert("Form submitted successfully!", "success");
+          this.reset(); // Reset the form after successful submission
+      } else {
+          const errorData = await response.json();
+          showCustomAlert(`Form submission failed: ${errorData.message || "Unknown error"}`, "error");
       }
-    }
-    return "";
+  } catch (error) {
+      console.error("Error submitting form:", error);
+      showCustomAlert("An error occurred. Please try again later.", "error");
   }
-// email sent end  
+});
+
+// Function to show a custom-styled alert
+function showCustomAlert(message, type) {
+  const alertBox = document.getElementById("alert-box");
+  const alertMessage = document.getElementById("alert-message");
+
+  // Set the message and type-specific styles
+  alertMessage.textContent = message;
+  alertBox.className = type === "success" ? "custom-alert success" : "custom-alert error";
+
+  // Display the alert box
+  alertBox.style.display = "block";
+
+  // Automatically hide the alert after 3 seconds
+  setTimeout(() => {
+      alertBox.style.display = "none";
+  }, 3000);
+}
+
 
 document.addEventListener("visibilitychange", function () {
   if (document.visibilityState === "visible") {

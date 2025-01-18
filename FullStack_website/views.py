@@ -22,11 +22,12 @@ def send_email(request):
             # Extract form data (ensure keys match the form field names)
             name = data.get("name", "Anonymous")
             email = data.get("email", "No Email Provided")
+            phone = data.get("phone", 'No Phone Provided')
             message = data.get("message", "")
 
             # Compose the email
             subject = f"Contact Form Submission from {name}"
-            body = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+            body = f"Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
             recipient_list = ["chaitanyalohani175@gmail.com"]  # Replace with your email address
 
             # Send the email

@@ -1229,3 +1229,39 @@ form .button-area {
   top: calc(100% - 12rem);
 }
 /* scroll top ends */
+
+/* Base styles for the alert box */
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Success alert styles */
+.custom-alert.success {
+    background-color: #28a745; /* Green for success */
+}
+
+/* Error alert styles */
+.custom-alert.error {
+    background-color: #dc3545; /* Red for error */
+}
+
+/* Close button styles */
+.custom-alert .close-btn {
+    margin-left: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.custom-alert .close-btn:hover {
+    color: #f5f5f5;
+}
