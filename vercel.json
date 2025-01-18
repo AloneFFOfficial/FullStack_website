@@ -1,0 +1,14 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "manage.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "manage.py" }
+    ],
+    "ignoreCommand": "echo 'Nothing to ignore'"
+  }
+  
